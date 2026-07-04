@@ -22,7 +22,7 @@ function traiterDefinitionDisponibilites($medecinId) {
     $confirmation = enregistrerDisponibilites($medecinId, $saisie['date'], $saisie['heureDebut'], $saisie['heureFin'], (int)$saisie['duree']);
     afficherConfirmation($confirmation);
 }
-function traiterRechercheMedecin() {
+function traiterRechercheMedecin($patientId) {
     afficherTitre("Recherche d'un médecin");
 
     $saisie = saisirRechercheMedecin();
@@ -45,4 +45,24 @@ function traiterRechercheMedecin() {
 
     $creneauxLibres = obtenirCreneauxLibres($medecinId);
     afficherAgendaMedecin($creneauxLibres);
+
+    if (empty($creneauxLibres)) {
+        return;
+    }
+
+    traiterPriseRendezVous($patientId, $creneauxLibres);
+}
+
+function traiterPriseRendezVous($patientId, $creneauxLibres) {
+    afficherTitre("Prise de rendez-vous");
+
+    $creneauId = saisirSelectionCreneau();
+
+    $resultat = validerCreneauDansListe($creneauId, $creneauxLibres);
+    if ($resultat !== "ok") {
+        afficherErreur($resultat);
+        return;
+    }
+
+    
 }

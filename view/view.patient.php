@@ -23,11 +23,6 @@ function afficherListeMedecins($medecins) {
     }
 }
 
-function saisirSelectionMedecin() {
-    $id = lireEntree("Identifiant du médecin choisi : ");
-    return (int)$id;
-}
-
 function afficherAgendaMedecin($creneaux) {
     if (empty($creneaux)) {
         echo "Aucun créneau libre disponible pour ce médecin.\n";
@@ -35,6 +30,12 @@ function afficherAgendaMedecin($creneaux) {
     }
     echo "\n--- Créneaux libres ---\n";
     foreach ($creneaux as $creneau) {
-        echo $creneau['date'] . " : " . $creneau['heureDebut'] . " - " . $creneau['heureFin'] . "\n";
+        echo $creneau['id'] . ". " . $creneau['date']
+            . " : " . $creneau['heureDebut'] . " - " . $creneau['heureFin'] . "\n";
     }
+}
+
+function saisirSelectionCreneau() {
+    $id = lireEntree("Identifiant du créneau souhaité : ");
+    return (int)$id;
 }
