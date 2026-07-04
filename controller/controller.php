@@ -64,5 +64,10 @@ function traiterPriseRendezVous($patientId, $creneauxLibres) {
         return;
     }
 
-    
+    $confirme = saisirConfirmationReservation();
+    if (!$confirme) {
+        afficherConfirmation("Réservation annulée par le patient");
+        return;
+    }
+
 }

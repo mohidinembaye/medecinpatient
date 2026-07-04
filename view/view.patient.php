@@ -39,3 +39,7 @@ function saisirSelectionCreneau() {
     $id = lireEntree("Identifiant du créneau souhaité : ");
     return (int)$id;
 }
+function saisirConfirmationReservation() {
+    $reponse = lireEntree("Confirmez-vous la réservation de ce créneau ? (O/N) : ");
+    return strtoupper(trim($reponse)) === 'O';
+}
