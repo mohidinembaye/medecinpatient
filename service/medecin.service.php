@@ -51,3 +51,12 @@ function obtenirCreneauxLibres($medecinId) {
     }
     return $resultats;
 }
+function creneauEstLibre($creneauId) {
+    global $creneaux;
+    foreach ($creneaux as $creneau) {
+        if ($creneau['id'] === $creneauId) {
+            return $creneau['statut'] === 'Libre';
+        }
+    }
+    return false;
+}

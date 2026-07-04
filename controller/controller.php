@@ -52,7 +52,6 @@ function traiterRechercheMedecin($patientId) {
 
     traiterPriseRendezVous($patientId, $creneauxLibres);
 }
-
 function traiterPriseRendezVous($patientId, $creneauxLibres) {
     afficherTitre("Prise de rendez-vous");
 
@@ -67,6 +66,11 @@ function traiterPriseRendezVous($patientId, $creneauxLibres) {
     $confirme = saisirConfirmationReservation();
     if (!$confirme) {
         afficherConfirmation("Réservation annulée par le patient");
+        return;
+    }
+
+    if (!creneauEstLibre($creneauId)) {
+        afficherErreur("Ce créneau vient d'être réservé par un autre patient, veuillez en choisir un autre");
         return;
     }
 
