@@ -1,8 +1,9 @@
 <?php
 
 require_once 'utils/utils.php';
+require_once 'model/medecin.model.php';   
 require_once 'view/view.medecin.php';
-require_once 'view/view.patient.php';      
+require_once 'view/view.patient.php';
 require_once 'validator/medecin.validator.php';
 require_once 'service/medecin.service.php';
 require_once 'controller/controller.php';
