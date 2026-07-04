@@ -18,6 +18,7 @@ function afficherErreur($message) {
 function afficherMenuPrincipal() {
     echo "\n===== PLATEFORME DE PRISE DE RENDEZ-VOUS MEDICAUX =====\n";
     echo "1. Espace Médecin\n";
+    echo "2. Espace Patient\n"; 
     echo "0. Quitter\n";
 }
 

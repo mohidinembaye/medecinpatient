@@ -22,3 +22,10 @@ function traiterDefinitionDisponibilites($medecinId) {
     $confirmation = enregistrerDisponibilites($medecinId, $saisie['date'], $saisie['heureDebut'], $saisie['heureFin'], (int)$saisie['duree']);
     afficherConfirmation($confirmation);
 }
+function traiterRechercheMedecin() {
+    afficherTitre("Recherche d'un médecin");
+
+    $saisie = saisirRechercheMedecin();
+
+   
+}
