@@ -3,6 +3,7 @@
 function afficherMenuPatient() {
     echo "\n----- ESPACE PATIENT : RECHERCHE DE MEDECIN -----\n";
     echo "1. Rechercher un médecin\n";
+    echo "2. Annuler un rendez-vous\n"; // ajout
     echo "0. Retour\n";
 }
 
@@ -41,5 +42,26 @@ function saisirSelectionCreneau() {
 }
 function saisirConfirmationReservation() {
     $reponse = lireEntree("Confirmez-vous la réservation de ce créneau ? (O/N) : ");
+    return strtoupper(trim($reponse)) === 'O';
+}
+function afficherRendezVousAVenir($rendezVous) {
+    if (empty($rendezVous)) {
+        echo "Vous n'avez aucun rendez-vous à venir.\n";
+        return;
+    }
+    echo "\n--- Vos rendez-vous à venir ---\n";
+    foreach ($rendezVous as $rdv) {
+        echo $rdv['id'] . ". " . $rdv['date']
+            . " : " . $rdv['heureDebut'] . " - " . $rdv['heureFin']
+            . " (médecin id " . $rdv['medecinId'] . ")\n";
+    }
+}
+
+function saisirSelectionRendezVousAAnnuler() {
+    $id = lireEntree("Identifiant du rendez-vous à annuler : ");
+    return (int)$id;
+}
+function saisirConfirmationAnnulation() {
+    $reponse = lireEntree("Confirmez-vous l'annulation de ce rendez-vous ? (O/N) : ");
     return strtoupper(trim($reponse)) === 'O';
 }

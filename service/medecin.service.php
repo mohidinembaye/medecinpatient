@@ -76,3 +76,29 @@ function envoyerEmailConfirmation($email, $creneau) {
     echo "[EMAIL envoyé à " . $email . "] Votre rendez-vous du " . $creneau['date']
         . " de " . $creneau['heureDebut'] . " à " . $creneau['heureFin'] . " est confirmé.\n";
 }
+function libererCreneau($creneauId) {
+    global $creneaux;
+    foreach ($creneaux as &$creneau) {
+        if ($creneau['id'] === $creneauId) {
+            $creneau['statut'] = 'Libre';
+            unset($creneau['patientId']);
+            return $creneau;
+        }
+    }
+    return null;
+}
+function notifierMedecinAnnulation($medecin, $creneau) {
+    echo "[NOTIFICATION envoyée à " . $medecin['email'] . "] "
+        . "Le rendez-vous du " . $creneau['date']
+        . " de " . $creneau['heureDebut'] . " à " . $creneau['heureFin']
+        . " a été annulé par le patient.\n";
+}
+function obtenirMedecinParId($medecinId) {
+    global $medecins;
+    foreach ($medecins as $medecin) {
+        if ($medecin['id'] === $medecinId) {
+            return $medecin;
+        }
+    }
+    return null;
+}
