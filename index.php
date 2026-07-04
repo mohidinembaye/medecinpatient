@@ -7,6 +7,7 @@ require_once 'view/view.medecin.php';
 require_once 'view/view.patient.php';
 require_once 'validator/medecin.validator.php';
 require_once 'service/medecin.service.php';
+require_once 'service/patient.service.php';  
 require_once 'controller/controller.php';
 
 function menuPatient() {

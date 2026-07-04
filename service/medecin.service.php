@@ -60,3 +60,19 @@ function creneauEstLibre($creneauId) {
     }
     return false;
 }
+function reserverCreneau($creneauId, $patientId) {
+    global $creneaux;
+    foreach ($creneaux as &$creneau) {
+        if ($creneau['id'] === $creneauId) {
+            $creneau['statut'] = 'Réservé';
+            $creneau['patientId'] = $patientId;
+            return $creneau;
+        }
+    }
+    return null;
+}
+
+function envoyerEmailConfirmation($email, $creneau) {
+    echo "[EMAIL envoyé à " . $email . "] Votre rendez-vous du " . $creneau['date']
+        . " de " . $creneau['heureDebut'] . " à " . $creneau['heureFin'] . " est confirmé.\n";
+}

@@ -74,4 +74,13 @@ function traiterPriseRendezVous($patientId, $creneauxLibres) {
         return;
     }
 
+    $creneauReserve = reserverCreneau($creneauId, $patientId);
+
+    $patient = obtenirPatientParId($patientId);
+    if ($patient !== null) {
+        envoyerEmailConfirmation($patient['email'], $creneauReserve);
+    }
+
+    afficherConfirmation("Rendez-vous réservé avec succès pour le " . $creneauReserve['date']
+        . " de " . $creneauReserve['heureDebut'] . " à " . $creneauReserve['heureFin']);
 }
