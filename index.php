@@ -1,22 +1,22 @@
 <?php
 
-
 require_once 'utils/utils.php';
+require_once 'model/medecin.model.php';   
 require_once 'view/view.medecin.php';
+require_once 'view/view.patient.php';
 require_once 'validator/medecin.validator.php';
 require_once 'service/medecin.service.php';
 require_once 'controller/controller.php';
 
 
 
-function menuMedecin() {
-    $medecinId = (int)lireEntree("Identifiant du médecin : ");
+function menuPatient() {
     $retour = false;
     while (!$retour) {
-        afficherMenuMedecin();
+        afficherMenuPatient();
         switch (lireEntree("Votre choix : ")) {
             case '1':
-                traiterGenerationCreneaux($medecinId);
+                traiterRechercheMedecin();
                 break;
             case '0':
                 $retour = true;
@@ -27,16 +27,9 @@ function menuMedecin() {
     }
 }
 
-
-
-$quitter = false;
-while (!$quitter) {
-    afficherMenuPrincipal();
-    switch (lireEntree("Votre choix : ")) {
-        case '1': menuMedecin(); break;
-        case '0': $quitter = true; break;
-        default: afficherErreur("Choix invalide");
-    }
+switch (lireEntree("Votre choix : ")) {
+    case '1': menuMedecin(); break;
+    case '2': menuPatient(); break; // ajout
+    case '0': $quitter = true; break;
+    default: afficherErreur("Choix invalide");
 }
-
-echo "\nFermeture de l'application. À bientôt !\n";

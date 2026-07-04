@@ -22,3 +22,27 @@ function traiterDefinitionDisponibilites($medecinId) {
     $confirmation = enregistrerDisponibilites($medecinId, $saisie['date'], $saisie['heureDebut'], $saisie['heureFin'], (int)$saisie['duree']);
     afficherConfirmation($confirmation);
 }
+function traiterRechercheMedecin() {
+    afficherTitre("Recherche d'un médecin");
+
+    $saisie = saisirRechercheMedecin();
+
+    $medecinsTrouves = rechercherMedecinsParSpecialite($saisie['specialite']);
+
+    afficherListeMedecins($medecinsTrouves);
+
+    if (empty($medecinsTrouves)) {
+        return;
+    }
+
+    $medecinId = saisirSelectionMedecin();
+
+    $resultat = validerIdMedecinExiste($medecinId, $medecinsTrouves);
+    if ($resultat !== "ok") {
+        afficherErreur($resultat);
+        return;
+    }
+
+    $creneauxLibres = obtenirCreneauxLibres($medecinId);
+    afficherAgendaMedecin($creneauxLibres);
+}
