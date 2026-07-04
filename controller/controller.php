@@ -27,5 +27,12 @@ function traiterRechercheMedecin() {
 
     $saisie = saisirRechercheMedecin();
 
-   
+    $medecinsTrouves = rechercherMedecinsParSpecialite($saisie['specialite']);
+
+    afficherListeMedecins($medecinsTrouves);
+
+    if (empty($medecinsTrouves)) {
+        return; 
+    }
+
 }
