@@ -87,3 +87,18 @@ function libererCreneau($creneauId) {
     }
     return null;
 }
+function notifierMedecinAnnulation($medecin, $creneau) {
+    echo "[NOTIFICATION envoyée à " . $medecin['email'] . "] "
+        . "Le rendez-vous du " . $creneau['date']
+        . " de " . $creneau['heureDebut'] . " à " . $creneau['heureFin']
+        . " a été annulé par le patient.\n";
+}
+function obtenirMedecinParId($medecinId) {
+    global $medecins;
+    foreach ($medecins as $medecin) {
+        if ($medecin['id'] === $medecinId) {
+            return $medecin;
+        }
+    }
+    return null;
+}

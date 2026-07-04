@@ -114,4 +114,8 @@ function traiterAnnulationRendezVous($patientId) {
         . " de " . $creneauLibere['heureDebut'] . " à " . $creneauLibere['heureFin']
         . " est de nouveau disponible");
 
+    $medecin = obtenirMedecinParId($creneauLibere['medecinId']);
+    if ($medecin !== null) {
+        notifierMedecinAnnulation($medecin, $creneauLibere);
+    }
 }
