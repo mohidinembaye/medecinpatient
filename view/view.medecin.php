@@ -27,3 +27,10 @@ function afficherMenuMedecin() {
     echo "1. Définir mes disponibilités\n";
     echo "0. Retour\n";
 }
+function saisirDisponibilites() {
+    $date = lireEntree("Date (AAAA-MM-JJ) : ");
+    $heureDebut = lireEntree("Heure de début (HH:MM) : ");
+    $heureFin = lireEntree("Heure de fin (HH:MM) : ");
+    $duree = lireEntree("Durée moyenne d'une consultation (en minutes) : ");
+    return ['date' => $date, 'heureDebut' => $heureDebut, 'heureFin' => $heureFin, 'duree' => $duree];
+}
