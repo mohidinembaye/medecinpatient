@@ -102,4 +102,10 @@ function traiterAnnulationRendezVous($patientId) {
         return;
     }
 
+    $confirme = saisirConfirmationAnnulation();
+    if (!$confirme) {
+        afficherConfirmation("Annulation abandonnée, le rendez-vous est maintenu");
+        return;
+    }
+
 }

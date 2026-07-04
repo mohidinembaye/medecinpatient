@@ -61,3 +61,7 @@ function saisirSelectionRendezVousAAnnuler() {
     $id = lireEntree("Identifiant du rendez-vous à annuler : ");
     return (int)$id;
 }
+function saisirConfirmationAnnulation() {
+    $reponse = lireEntree("Confirmez-vous l'annulation de ce rendez-vous ? (O/N) : ");
+    return strtoupper(trim($reponse)) === 'O';
+}
