@@ -22,7 +22,7 @@ function traiterDefinitionDisponibilites($medecinId) {
     $confirmation = enregistrerDisponibilites($medecinId, $saisie['date'], $saisie['heureDebut'], $saisie['heureFin'], (int)$saisie['duree']);
     afficherConfirmation($confirmation);
 }
-function traiterRechercheMedecin() {
+function traiterRechercheMedecin($patientId) {
     afficherTitre("Recherche d'un médecin");
 
     $saisie = saisirRechercheMedecin();
@@ -45,4 +45,42 @@ function traiterRechercheMedecin() {
 
     $creneauxLibres = obtenirCreneauxLibres($medecinId);
     afficherAgendaMedecin($creneauxLibres);
+
+    if (empty($creneauxLibres)) {
+        return;
+    }
+
+    traiterPriseRendezVous($patientId, $creneauxLibres);
+}
+function traiterPriseRendezVous($patientId, $creneauxLibres) {
+    afficherTitre("Prise de rendez-vous");
+
+    $creneauId = saisirSelectionCreneau();
+
+    $resultat = validerCreneauDansListe($creneauId, $creneauxLibres);
+    if ($resultat !== "ok") {
+        afficherErreur($resultat);
+        return;
+    }
+
+    $confirme = saisirConfirmationReservation();
+    if (!$confirme) {
+        afficherConfirmation("Réservation annulée par le patient");
+        return;
+    }
+
+    if (!creneauEstLibre($creneauId)) {
+        afficherErreur("Ce créneau vient d'être réservé par un autre patient, veuillez en choisir un autre");
+        return;
+    }
+
+    $creneauReserve = reserverCreneau($creneauId, $patientId);
+
+    $patient = obtenirPatientParId($patientId);
+    if ($patient !== null) {
+        envoyerEmailConfirmation($patient['email'], $creneauReserve);
+    }
+
+    afficherConfirmation("Rendez-vous réservé avec succès pour le " . $creneauReserve['date']
+        . " de " . $creneauReserve['heureDebut'] . " à " . $creneauReserve['heureFin']);
 }

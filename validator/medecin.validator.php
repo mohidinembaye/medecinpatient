@@ -37,3 +37,12 @@ function validerIdMedecinExiste($id, $medecins) {
     }
     return "Aucun médecin ne correspond à cet identifiant";
 }
+
+function validerCreneauDansListe($creneauId, $creneauxLibres) {
+    foreach ($creneauxLibres as $creneau) {
+        if ($creneau['id'] === $creneauId) {
+            return "ok";
+        }
+    }
+    return "Ce créneau ne fait pas partie des créneaux proposés";
+}
