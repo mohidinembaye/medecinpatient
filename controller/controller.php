@@ -108,4 +108,10 @@ function traiterAnnulationRendezVous($patientId) {
         return;
     }
 
+    $creneauLibere = libererCreneau($creneauId);
+
+    afficherConfirmation("Rendez-vous annulé, le créneau du " . $creneauLibere['date']
+        . " de " . $creneauLibere['heureDebut'] . " à " . $creneauLibere['heureFin']
+        . " est de nouveau disponible");
+
 }
