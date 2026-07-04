@@ -32,7 +32,17 @@ function traiterRechercheMedecin() {
     afficherListeMedecins($medecinsTrouves);
 
     if (empty($medecinsTrouves)) {
-        return; 
+        return;
     }
 
+    $medecinId = saisirSelectionMedecin();
+
+    $resultat = validerIdMedecinExiste($medecinId, $medecinsTrouves);
+    if ($resultat !== "ok") {
+        afficherErreur($resultat);
+        return;
+    }
+
+    $creneauxLibres = obtenirCreneauxLibres($medecinId);
+    afficherAgendaMedecin($creneauxLibres);
 }

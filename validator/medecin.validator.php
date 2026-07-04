@@ -29,3 +29,11 @@ function validerDureeConsultation($duree) {
     }
     return "ok";
 }
+function validerIdMedecinExiste($id, $medecins) {
+    foreach ($medecins as $medecin) {
+        if ($medecin['id'] === $id) {
+            return "ok";
+        }
+    }
+    return "Aucun médecin ne correspond à cet identifiant";
+}

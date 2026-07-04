@@ -41,3 +41,13 @@ function traiterRechercheMedecin() {
     $medecinsTrouves = rechercherMedecinsParSpecialite($saisie['specialite']);
 
 }
+function obtenirCreneauxLibres($medecinId) {
+    global $creneaux;
+    $resultats = [];
+    foreach ($creneaux as $creneau) {
+        if ($creneau['medecinId'] === $medecinId && $creneau['statut'] === 'Libre') {
+            $resultats[] = $creneau;
+        }
+    }
+    return $resultats;
+}
