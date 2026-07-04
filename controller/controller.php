@@ -84,3 +84,22 @@ function traiterPriseRendezVous($patientId, $creneauxLibres) {
     afficherConfirmation("Rendez-vous réservé avec succès pour le " . $creneauReserve['date']
         . " de " . $creneauReserve['heureDebut'] . " à " . $creneauReserve['heureFin']);
 }
+function traiterAnnulationRendezVous($patientId) {
+    afficherTitre("Annulation d'un rendez-vous");
+
+    $rendezVousAVenir = obtenirRendezVousAVenir($patientId);
+    afficherRendezVousAVenir($rendezVousAVenir);
+
+    if (empty($rendezVousAVenir)) {
+        return;
+    }
+
+    $creneauId = saisirSelectionRendezVousAAnnuler();
+
+    $resultat = validerCreneauDansListe($creneauId, $rendezVousAVenir);
+    if ($resultat !== "ok") {
+        afficherErreur($resultat);
+        return;
+    }
+
+}

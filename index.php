@@ -11,13 +11,17 @@ require_once 'service/patient.service.php';
 require_once 'controller/controller.php';
 
 function menuPatient() {
-    $patientId = (int)lireEntree("Identifiant du patient : "); 
+    $patientId = (int)lireEntree("Identifiant du patient : ");
     $retour = false;
     while (!$retour) {
         afficherMenuPatient();
         switch (lireEntree("Votre choix : ")) {
             case '1':
-                traiterRechercheMedecin($patientId); 
+                traiterRechercheMedecin($patientId);
+                break;
+            case '2':
+                traiterAnnulationRendezVous($patientId); // ajout
+                break;
             case '0':
                 $retour = true;
                 break;
