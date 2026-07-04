@@ -29,7 +29,7 @@ function menuPatient() {
 
 switch (lireEntree("Votre choix : ")) {
     case '1': menuMedecin(); break;
-    case '2': menuPatient(); break; // ajout
+    case '2': menuPatient(); break; 
     case '0': $quitter = true; break;
     default: afficherErreur("Choix invalide");
 }
