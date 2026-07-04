@@ -16,3 +16,10 @@
     }
     return $creneauxGeneres;
 }
+function enregistrerDisponibilites($medecinId, $date, $heureDebut, $heureFin, $duree) {
+    $nouveauxCreneaux = genererListeCreneaux($medecinId, $date, $heureDebut, $heureFin, $duree);
+    foreach ($nouveauxCreneaux as $creneau) {
+        ajouterCreneau($creneau);
+    }
+    return "Disponibilités enregistrées : " . count($nouveauxCreneaux) . " créneau(x) créé(s) avec le statut Libre";
+}

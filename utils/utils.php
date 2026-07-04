@@ -12,3 +12,10 @@ function minutesEnHeure($minutes) {
     $m = $minutes % 60;
     return sprintf('%02d:%02d', $h, $m);
 }
+function genererId($tableau) {
+    if (empty($tableau)) {
+        return 1;
+    }
+    $ids = array_column($tableau, 'id');
+    return max($ids) + 1;
+}

@@ -1,6 +1,7 @@
 <?php
-function traiterGenerationCreneaux($medecinId) {
+function traiterDefinitionDisponibilites($medecinId) {
     afficherTitre("Définir mes disponibilités");
+    
     $saisie = saisirDisponibilites();
 
     $resultat = validerDateFuture($saisie['date']);
@@ -18,10 +19,6 @@ function traiterGenerationCreneaux($medecinId) {
     $resultat = validerDureeConsultation($saisie['duree']);
     if ($resultat !== "ok") { afficherErreur($resultat); return; }
 
-    $creneauxGeneres = genererListeCreneaux($medecinId, $saisie['date'], $saisie['heureDebut'], $saisie['heureFin'], (int)$saisie['duree']);
-
-    afficherTitre("Créneaux générés (non encore enregistrés)");
-    foreach ($creneauxGeneres as $creneau) {
-        echo $creneau['heureDebut'] . " - " . $creneau['heureFin'] . " (" . $creneau['statut'] . ")\n";
-    }
+    $confirmation = enregistrerDisponibilites($medecinId, $saisie['date'], $saisie['heureDebut'], $saisie['heureFin'], (int)$saisie['duree']);
+    afficherConfirmation($confirmation);
 }
